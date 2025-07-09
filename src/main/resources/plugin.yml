@@ -1,0 +1,10 @@
+name: VaultedItemFlex
+version: '1.0.0'
+main: net.vaultedmc.itemflex.ItemFlex
+api-version: '1.21'
+authors: [ VaultedMC ]
+commands:
+  itemflex:
+    description: "Flex your items with style!"
+    usage: "Usage: /itemflex"
+

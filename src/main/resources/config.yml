@@ -1,0 +1,187 @@
+Settings:
+  # Configuration for plugin permissions and cooldowns.
+  Permissions:
+    # If true, permission nodes will be enforced across the plugin.
+    # If false, only server operators (OPs) can use /itemflex reload,
+    # and all players will be subject to cooldowns.
+    Enabled: true
+
+    # Permission node required to use the /itemflex command.
+    Use: "itemflex.use"
+
+    # Permission node that allows a player to bypass the usage cooldown.
+    Bypass-Cooldown: "itemflex.cooldownbypass"
+
+    # Permission node required to execute /itemflex reload.
+    Reload: "itemflex.reload"
+
+  # Cooldown duration between uses of the /itemflex command.
+  # Supports flexible time formats, e.g.:
+  #   "1m" = 1 minute
+  #   "2h 30m" = 2 hours and 30 minutes
+  Use-Cooldown: "1m"
+
+  # Maximum number of lore lines shown from the %item_lore% placeholder.
+  # If the item has more lore lines than this value, the rest will be skipped.
+  # Set to 0 to disable lore entirely.
+  Lore-Line-Limit: 3
+
+  # Whether to skip empty lines when displaying %item_lore%.
+  # A line is considered empty if it contains no visible characters,
+  # including lines that only contain color codes or formatting.
+  Ignore-Empty-Lore-Lines: true
+
+  # Vertical spacing between each hologram line.
+  # This controls how far apart the lines appear above the item.
+  Line-Spacing: 0.17
+
+  # Text lines displayed above the item hologram.
+  # Supports PlaceholderAPI placeholders, and internal such as
+  #   %item_name% — The display name of the held item.
+  #   %item_lore% — Each line of the item's lore (one hologram line per lore line).
+  #
+  # ⚠️ NOTE: %item_lore% can produce many lines if the item has a long lore.
+  # You can limit this by adjusting the Lore-Line-Limit setting.
+  Lines:
+    - "&6&lFLEXING"
+    - "%item_name%"
+
+  Spawn-Location:
+    # Distance from the player's **eye location** where the hologram spawns.
+    Distance: 1.5
+
+    # Offset added to the base spawn location.
+    # Useful for raising or shifting the hologram position.
+    Offset:
+      X: 0
+      Y: 1.5
+      Z: 0
+
+    # Offset specifically for the item inside the hologram.
+    # Should usually match the above offset for best alignment.
+    Item-Offset:
+      X: 0
+      Y: -0.17
+      Z: 0
+
+  # How the item is displayed (e.g. NONE, FIXED, GUI).
+  # See: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/ItemDisplay.ItemDisplayTransform.html
+  Display-Transform: GUI
+
+  # Scale of displayed items (if the item is NOT a block).
+  Item-Display-Scale: 0.75
+
+  # Scale of displayed items (if the item IS a block).
+  Block-Display-Scale: 0.5
+
+  # How the hologram text faces the viewer.
+  # See: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/Display.Billboard.html
+  Billboard-Type: "VERTICAL"
+
+  # Background color and opacity of the hologram text.
+  # All values are 0–255. Use Opacity: 0 for no background.
+  Background-Color:
+    Opacity: 0
+    Red: 0
+    Green: 0
+    Blue: 0
+
+  # Brightness of the text lines in the hologram.
+  # 0–15, where 15 is the brightest.
+  Brightness:
+    Block: 15
+    Sky: 15
+
+  # If true, text lines will render with a shadow for better readability and visual depth.
+  Text-Shadow: true
+
+  # Particle effect played when the animation starts.
+  Spawn-Particle:
+    # Type of particle.
+    # See: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Particle.html
+    Particle: "GLOW"
+    Count: 20
+    Offset:
+      X: 0.1
+      Y: 0.2
+      Z: 0.1
+    Speed: 0.01
+
+  # Sound played when the animation starts.
+  Spawn-Sound:
+    # See: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+    Sound: "ENTITY_EVOKER_CAST_SPELL"
+    Volume: 1.2
+    Pitch: 1.5
+
+  # Controls the scale animation (in and out).
+  Scale-Settings:
+    # Initial scale of the item.
+    Starting-Scale: 0.01
+    # Amount the item scales up/down per tick.
+    Scale-Increment: 0.06
+
+  # Speed of item rotation (in degrees per tick).
+  Rotate-Speed: 7
+
+  # Duration of the animation, in ticks (20 ticks = 1 second).
+  Animation-Duration: 80
+
+  # Particle effect played when the animation ends.
+  Disappear-Particle:
+    Particle: "FIREWORK"
+    Count: 15
+    Offset:
+      X: 0.2
+      Y: 0.2
+      Z: 0.2
+    Speed: 0.05
+
+  # Sound played when the animation ends.
+  Disappear-Sound:
+    Sound: "BLOCK_AMETHYST_BLOCK_BREAK"
+    Volume: 0.8
+    Pitch: 1.7
+
+  # Ambient particles shown during the animation.
+  Ambient-Particle:
+    # How often (in ticks) to spawn particles.
+    Frequency: 10
+    Particle: "ENCHANT"
+    Count: 3
+    Offset:
+      X: 0.1
+      Y: 0.1
+      Z: 0.1
+    Speed: 0
+
+  # Ambient sound played during the animation.
+  Ambient-Sound:
+    # How often (in ticks) to play this sound.
+    Frequency: 20
+    Sound: "BLOCK_BEACON_AMBIENT"
+    Volume: 0.3
+    Pitch: 1.2
+
+# All plugin messages can be customized below.
+# Supports PlaceholderAPI placeholders and Minecraft hex colors (e.g. #A020F0).
+Messages:
+  # Shown when a player lacks the required permission.
+  No-Permission: "#FF5555You do not have permission to use this."
+
+  # Shown when the player runs /itemflex without holding an item.
+  Must-Hold-Item: "#FFA500You must be holding an item to flex it!"
+
+  # Shown when the player runs /itemflex while already flexing an item.
+  Flex-Active: "#FFA500You already have an item flex active!"
+
+  # Shown when the player tries to flex while on cooldown.
+  # Placeholders:
+  #   %time% — Displays the remaining cooldown duration.
+  Cooldown-Active: "#FFD700You're still on cooldown! Please wait #FF5555%time%#FFD700 before flexing again."
+
+  # Shown when a non-player (e.g. console) tries to execute a player-only command.
+  Player-Only: "#FF4444This command can only be used by players."
+
+  # Shown when the plugin configuration is successfully reloaded.
+  Config-Reloaded: "#55FF55✔ Configuration reloaded successfully."
